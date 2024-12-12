@@ -1,0 +1,85 @@
+version: "3.9"
+
+networks:
+  dev:
+
+services:
+  nginx:
+    image: nginx:stable-alpine
+    ports:
+      - "80:80"
+    volumes:
+      - './nginx.conf:/etc/nginx/nginx.conf'
+    depends_on:
+      - backend
+      - frontend
+    networks:
+      - dev
+    deploy:
+      replicas: 0
+
+  frontend:
+    restart: unless-stopped
+
+    build:
+      context: ./frontend
+      args:
+        - REACT_APP_API_URL=${HOST}/api
+    networks:
+      - dev
+    ports:
+      - "3000:3000"
+      
+  backend:
+    restart: unless-stopped
+
+    build:
+      context: ./backend
+    networks:
+      - dev
+    environment:
+      - PYTHONUNBUFFERED=1
+      - REDIS_HOST=redis
+      - BOT_TOKEN=${BOT_TOKEN}
+      - DEVMODE=${DEVMODE}
+      - HOST=${HOST}
+      - PORT=${BACKEND_PORT}
+      - ENGINE=${POSTGRES_USER}:${POSTGRES_PASSWORD}@example-postgres:5432/${POSTGRES_DB}
+    ports:
+      - "${BACKEND_PORT}:${BACKEND_PORT}"
+    depends_on:
+      - example-postgres
+
+    volumes:
+      - ./backend:/backend  # Монтируем директорию app с хоста в контейнер
+      - ./backend/media:/backend/media  # Монтируем директорию app с хоста в контейнер
+
+    working_dir: /backend
+
+  example-postgres:
+    restart: unless-stopped
+
+    image: "postgres:13.3-alpine"
+    container_name: example-postgres
+    volumes:
+      - example-data:/var/lib/postgresql/data
+    ports:
+      - ${PGPORT}:${PGPORT}
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      PGPORT: ${PGPORT}
+    networks:
+      - dev
+
+  redis:
+    restart: unless-stopped
+
+    image: "redis:latest"
+    ports:
+    - "6379:6379"
+    networks:
+    - dev
+volumes:
+  example-data:
