@@ -1,0 +1,42 @@
+@keyframes activate {
+  from {
+    filter: brightness(1);
+  }
+
+  to {
+    filter: brightness(1.7);
+  }
+}
+
+footer {
+  right: 0;
+  bottom: 0;
+  left: 0;
+  top: auto;
+  position: fixed;
+  z-index: 3;
+
+  background-color: black;
+
+  font-size: 11px;
+  font-weight: 600;
+
+  padding-block: 10px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.229);
+}
+
+footer .tabs {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+footer .tab a {
+  color: #A6A6A6;
+}
+
+footer .tab.active {
+  animation: activate 0.35s;
+  animation-fill-mode: forwards;
+}

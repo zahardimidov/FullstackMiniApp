@@ -1,0 +1,80 @@
+.modal-sheet {
+    pointer-events: none;
+    display: flex;
+    align-items: flex-end;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    justify-content: center;
+    position: fixed;
+    z-index: 4;
+
+    transition: background 0.35s;
+}
+
+.modal-sheet.open {
+    background: #000000b3;
+    pointer-events: all;
+}
+
+.modal-sheet.close {
+    background: transparent;
+}
+
+.modal-sheet dialog {
+    background: #1c1c1e;
+    border: none;
+    border-radius: 16px 16px 0 0;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100% - 50px);
+    max-width: 100%;
+    outline: none;
+    overflow: hidden;
+    padding-bottom: 20px;
+    width: 100%;
+    z-index: 5;
+
+    transition: bottom 0.35s;
+}
+
+.modal-sheet.open dialog {
+    bottom: 0;
+}
+
+.modal-sheet.close dialog {
+    bottom: -100vh;
+}
+
+.modal-header {
+    align-items: center;
+    border-bottom: 1px solid #4b4b4b;
+    display: grid;
+    gap: 16px;
+    grid-template-columns: 1fr auto 1fr;
+    padding: 8px 8px 9px
+}
+
+.modal-header .modal-title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: .25px;
+    line-height: 28px
+}
+
+.close-btn {
+    cursor: pointer;
+    background: transparent;
+    border: 1px solid transparent;
+    aspect-ratio: 1/1;
+    margin-left: auto;
+    height: 48px;
+}
+
+.modal-content button {
+    background: #282828;
+    color: #fff;
+    margin-bottom: 24px;
+}

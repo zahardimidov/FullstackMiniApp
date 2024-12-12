@@ -1,0 +1,63 @@
+@keyframes alert-animation {
+    from {
+        top: 13%;
+        opacity: 0;
+    }
+
+    10% {
+        top: 10%;
+        opacity: 1;
+    }
+
+    90% {
+        top: 10%;
+        opacity: 1;
+    }
+
+    to {
+        top: 13%;
+        opacity: 0;
+    }
+}
+
+.alert-wrapper {
+    position: absolute;
+    left: 0%;
+    right: 0%;
+
+    animation: alert-animation;
+    animation-fill-mode: forwards;
+}
+
+.alert {
+    width: 80%;
+    height: 50px;
+    border-radius: 8px;
+    padding: 10px 20px;
+    margin: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: #1c1c1e;
+}
+
+.icon-wrapper {
+    width: 10%;
+}
+
+.text-wrapper {
+    width: 85%;
+}
+
+.text-wrapper .text {
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.alert img {
+    width: 100%;
+}
