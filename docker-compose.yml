@@ -44,7 +44,7 @@ services:
       - DEVMODE=${DEVMODE}
       - HOST=${HOST}
       - PORT=${BACKEND_PORT}
-      - ENGINE=${POSTGRES_USER}:${POSTGRES_PASSWORD}@example-postgres:5432/${POSTGRES_DB}
+      - ENGINE=${POSTGRES_USER}:${POSTGRES_PASSWORD}@example-postgres:${PGPORT}/${POSTGRES_DB}
     ports:
       - "${BACKEND_PORT}:${BACKEND_PORT}"
     depends_on:

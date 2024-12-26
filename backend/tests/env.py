@@ -12,7 +12,7 @@ load_dotenv(ENV_FILE)
 
 os.environ['ENGINE'] = 'test:test@localhost:5432/test'
 
-DOCKER_COMPOSE_FILE = BASE_DIR.joinpath('test.docker-compose.yml')
+DOCKER_COMPOSE_FILE = BASE_DIR.joinpath('backend/tests/docker-compose.yml')
 DOCKER_COMPOSE_DOWN = f'docker compose -f {DOCKER_COMPOSE_FILE} --env-file {ENV_FILE} down'
 DOCKER_COMPOSE_UP = f"docker compose -f {DOCKER_COMPOSE_FILE} --env-file {ENV_FILE} up --build -d"
 
